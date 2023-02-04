@@ -5,12 +5,12 @@ import "fmt"
 func main() {
 	var conferenceName = "Go conference"
 	const conferenceTickets = 50
-	var remainingTickets uint= 50
-	fmt.Printf("conferenceTickets is %T,remainingTickets is %T, conferenceName is %T\n",conferenceTickets,remainingTickets,conferenceName)
+	var remainingTickets uint = 50
+	fmt.Printf("conferenceTickets is %T,remainingTickets is %T, conferenceName is %T\n", conferenceTickets, remainingTickets, conferenceName)
 	fmt.Println("welcome to", conferenceName, "booking application")
-	fmt.Printf("we have total of %v tickets and %v are still available.\n",conferenceTickets,remainingTickets)
+	fmt.Printf("we have total of %v tickets and %v are still available.\n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
-	
+
 	//slice with fixed size
 	//var bookings [50]string
 
@@ -22,8 +22,8 @@ func main() {
 	var userMailID string
 	var userTickets uint
 
-	//ask user for their 
-	//here for scan function.. we need to provide the pointer location of the variable 
+	//ask user for their
+	//here for scan function.. we need to provide the pointer location of the variable
 	//instead of the variable name.
 	fmt.Println("Enter the user First name : ")
 	fmt.Scan(&userFirstName)
@@ -37,12 +37,9 @@ func main() {
 	fmt.Println("Enter the number of tickets to be booked : ")
 	fmt.Scan(&userTickets)
 	remainingTickets = remainingTickets - userTickets
-	bookings = append(bookings,userFirstName +" "+ userLastName)
+	bookings = append(bookings, userFirstName+" "+userLastName)
 
-	
-	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation mail at %v.\n",userFirstName,userLastName,userTickets,userMailID)
-	fmt.Printf("remaining tickets are %v\n",remainingTickets)
+	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation mail at %v.\n", userFirstName, userLastName, userTickets, userMailID)
+	fmt.Printf("remaining tickets are %v\n", remainingTickets)
 
-	fmt.Printf("the whole slice is : %v\n",bookings)
-
-}	
+}
