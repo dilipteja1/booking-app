@@ -2,17 +2,24 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"booking-app/helper"
 	
+
 )
 var confName = "Go conference"
 const conferenceTickets int = 50
 var remainingTickets uint = 50
-var bookings []string
+var bookings = make([]UserData, 0)
+
+type UserData struct {
+	FirstName string
+	LastName string
+	Email string
+	numberOfTickets uint
+}
 
 func main() {
 	
-
 	greetUsers()
 
 	//infinite for loop
@@ -21,18 +28,16 @@ func main() {
 		userFirstName, userLastName, userMailID, userTickets := getUserInputs()
 		//validating input
 
-		isValidName, isValidEmail, isValidTicket := validateUserInput(userFirstName, userLastName, userMailID, userTickets)
+		isValidName, isValidEmail, isValidTicket := helper.ValidateUserInput(userFirstName, userLastName, userMailID, userTickets,remainingTickets)
 
 		if isValidName && isValidEmail && isValidTicket {
-			remainingTickets = remainingTickets - userTickets
-			bookings = append(bookings, userFirstName+" "+userLastName)
+			bookTicket(userTickets,userFirstName,userLastName,userMailID)
 
-			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation mail at %v.\n", userFirstName, userLastName, userTickets, userMailID)
-			fmt.Printf("remaining tickets are %v\n", remainingTickets)
-
+			
 			var firstNames = getFirstNames()
 			fmt.Printf("all our bookings : %v\n", firstNames)
 			noTicketsRemaining := remainingTickets == 0
+
 			if noTicketsRemaining {
 				//end program
 				fmt.Println("our conference tickets are sold out .please visit next year")
@@ -66,8 +71,7 @@ func getFirstNames() []string {
 
 	// '_' this is a blank identifier, used when a variable has to be initialized but we dont use it.
 	for _, booking := range bookings {
-		var names = strings.Fields(booking)
-		firstNames = append(firstNames, names[0])
+		firstNames = append(firstNames, booking.FirstName)
 	}
 
 	return firstNames
@@ -100,4 +104,21 @@ func getUserInputs() (string, string, string, uint) {
 	fmt.Scan(&userTickets)
 
 	return userFirstName, userLastName, userMailID, userTickets
+}
+
+func bookTicket(userTickets uint, userFirstName string, userLastName string, userMailID string){
+	remainingTickets = remainingTickets - userTickets
+
+	var userData = UserData{
+		FirstName : userFirstName,
+		LastName : userLastName,
+		Email : userMailID,
+		numberOfTickets : userTickets,
+	}
+	
+
+	bookings = append(bookings, userData)
+	fmt.Printf("list of bookings : %v\v",bookings)
+	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation mail at %v.\n", userFirstName, userLastName, userTickets, userMailID)
+	fmt.Printf("remaining tickets are %v\n", remainingTickets)
 }
