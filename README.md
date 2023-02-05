@@ -1,6 +1,6 @@
 # booking-app
 
-This is a basic CLI based Ticket Booking app where the users can book their app concurrently without wait times.
+This is a basic CLI based Ticket Booking app where the users can book their tickets using the app concurrently without wait time.
 
 		Go concepts used: 
 	• Conditional Statments 
